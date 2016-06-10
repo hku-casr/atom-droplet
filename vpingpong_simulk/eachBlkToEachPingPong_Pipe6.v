@@ -171,12 +171,6 @@ module eachblktoeachpingpong_pipe6(
     always@(posedge clk or posedge reset) begin
         if (reset) begin            
             subblko <= 0;
-                                    
-            p0ToP1_pingpong <= 0;
-            p1ToP2_pingpong <= 0;
-            p2ToP3_pingpong <= 0;
-            p3ToP4_pingpong <= 0;
-            p4ToP5_pingpong <= 0;
             
         end else begin
         

@@ -54,39 +54,21 @@ module sixteentoonemuxtakeblk_pipe4(
     reg p0ToP1_myturnpingpong, p1ToP2_myturnpingpong;
     
     
-    always@(posedge clk or posedge reset) begin
-        if (reset) begin
+    always@(posedge clk) begin    
+        p0toP1_sel <= sel;
+        p1toP2_sel <= p0toP1_sel;
+        p2toP3_sel <= p1toP2_sel;
+                
+        p0ToP1_takeBlk <= sel < needpangstartinc  || sel > needpangendinc;
+        p1ToP2_takeBlk <= p0ToP1_takeBlk || p0ToP1_needpang;
+        p2ToP3_takeBlk <= p1ToP2_takeBlk && p1ToP2_myturnpingpong;
+        takeblko <= p2ToP3_takeBlk;
+        
+        p0ToP1_needpang <= needpang;
+        
+        p0ToP1_myturnpingpong <= myturnpingpong;
+        p1ToP2_myturnpingpong <= p0ToP1_myturnpingpong;
 
-            p0toP1_sel <= 0;
-            p1toP2_sel <= 0;
-            p2toP3_sel <= 0;
-            
-            p0ToP1_takeBlk <= 0;
-            p1ToP2_takeBlk <= 0;
-            p2ToP3_takeBlk <= 0;
-            takeblko <= 0;
-            
-            p0ToP1_needpang <= 0;
-            
-            p0ToP1_myturnpingpong <= myturnpingpong;
-            p1ToP2_myturnpingpong <= p0ToP1_myturnpingpong;
-             
-        end else begin
-            
-            p0toP1_sel <= sel;
-            p1toP2_sel <= p0toP1_sel;
-            p2toP3_sel <= p1toP2_sel;
-                    
-            p0ToP1_takeBlk <= sel < needpangstartinc  || sel > needpangendinc;
-            p1ToP2_takeBlk <= p0ToP1_takeBlk || p0ToP1_needpang;
-            p2ToP3_takeBlk <= p1ToP2_takeBlk && p1ToP2_myturnpingpong;
-            takeblko <= p2ToP3_takeBlk;
-            
-            p0ToP1_needpang <= needpang;
-            
-            p0ToP1_myturnpingpong <= myturnpingpong;
-            p1ToP2_myturnpingpong <= p0ToP1_myturnpingpong;
-        end
     end 
     
     //Level0

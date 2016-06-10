@@ -1951,7 +1951,7 @@ module subblkselpingpong(
     assign needpang = eol_p1 && !blkgap;
     
     
-    always@(posedge clk or posedge reset) begin
+    /*always@(posedge clk or posedge reset) begin
         if (reset) begin
             q00 <= 8'd0;
             q01 <= 8'd0;
@@ -1971,7 +1971,8 @@ module subblkselpingpong(
             q13 <= 8'd0;
             q14 <= 8'd0;
             q15 <= 8'd0;
-        end else begin
+        end else begin*/
+        always@(posedge clk) begin
             if (p9pingpong == 1'b1) begin
                 q00 <= ping00;
                 q01 <= ping01;
@@ -2013,7 +2014,7 @@ module subblkselpingpong(
                 q15 <= pong15;
             end
         end        
-    end
+    //end
 
     /*wire [7:0] prePong07;
     wire preTakePang07;

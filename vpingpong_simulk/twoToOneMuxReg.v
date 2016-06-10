@@ -14,13 +14,9 @@ module twotoonemuxreg(
     );
 
 
-    always@(posedge clk or posedge reset) begin
-        if (reset) begin
-            subblko <= 0;
-            
-        end else begin
-            subblko <= (sel == 1)? subblki1: subblki0;
-        end
-    end
+    always@(posedge clk) begin
 
+        subblko <= (sel == 1)? subblki1: subblki0;
+
+    end
 endmodule
